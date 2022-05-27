@@ -15,6 +15,14 @@ class CreateAssetsTable extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('gruppo_id')->nullable();
+            $table->foreign('gruppo_id')->references('id')->on('groups')->onDelete('set null');
+            $table->unsignedBigInteger('codice_id')->nullable();
+            $table->foreign('codice_id')->references('id')->on('codes')->onDelete('set null');
+            $table->string('nome');
+            $table->float('ammontare');
+            $table->float('prezzo_singolo');
+            $table->float('apy');
             $table->timestamps();
         });
     }

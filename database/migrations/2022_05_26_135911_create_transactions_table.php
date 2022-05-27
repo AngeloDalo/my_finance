@@ -15,6 +15,14 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('gruppo_id')->nullable();
+            $table->foreign('gruppo_id')->references('id')->on('groups')->onDelete('set null');
+            $table->unsignedBigInteger('codice_id')->nullable();
+            $table->foreign('codice_id')->references('id')->on('codes')->onDelete('set null');
+            $table->unsignedBigInteger('tipo_id')->nullable();
+            $table->foreign('tipo_id')->references('id')->on('types')->onDelete('set null');
+            $table->float('totale');
+            $table->date("data");
             $table->timestamps();
         });
     }
