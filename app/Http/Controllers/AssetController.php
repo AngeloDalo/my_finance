@@ -2,7 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
+use App\Transaction;
+use App\Asset;
+use App\Group;
+use App\Type;
+use App\Code;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Prophecy\Call\Call;
 
 class AssetController extends Controller
 {
@@ -13,7 +23,11 @@ class AssetController extends Controller
      */
     public function index()
     {
-        //
+        $assets = Asset::orderBy('ammontare', 'desc')->paginate(10);
+        $groups = Group::all();
+        $codes = Code::all();
+        $types = Type::all();
+        return view('admin.assets.index', ['assets' => $assets, 'groups' => $groups, 'types' => $types, 'codes' => $codes]);
     }
 
     /**

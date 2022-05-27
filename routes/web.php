@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('/', 'HomeController');
-// Route::resource('transactions', 'TotaleController');
+Route::resource('assets', 'AssetController');
 // Route::resource('casa', 'CasaController');
 // Route::resource('campagna', 'CampagnaController');
 // Route::resource('ventidue', 'VentidueController');
