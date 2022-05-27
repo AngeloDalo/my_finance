@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+use App\Type;
 
 class TypeSeeder extends Seeder
 {
@@ -11,6 +13,19 @@ class TypeSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $types = [
+            [
+                'nome' => 'Acquisto',
+            ],
+            [
+                'nome' => 'Vendita',
+            ],
+        ];
+
+        foreach ($types as $type) {
+            $newType = new  Type();
+            $newType->nome = $type['nome'];
+            $newType->save();
+        }
     }
 }

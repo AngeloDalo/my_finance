@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+use App\Group;
 
 class GroupSeeder extends Seeder
 {
@@ -11,6 +13,22 @@ class GroupSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $groups = [
+            [
+                'nome' => 'Cryto',
+            ],
+            [
+                'nome' => 'Stock',
+            ],
+            [
+                'nome' => 'Liquidità',
+            ],
+        ];
+
+        foreach ($groups as $group) {
+            $newGroup = new Group();
+            $newGroup->nome = $group['nome'];
+            $newGroup->save();
+        }
     }
 }
