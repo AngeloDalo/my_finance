@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('/', 'HomeController');
+// Route::resource('transactions', 'TotaleController');
+// Route::resource('casa', 'CasaController');
+// Route::resource('campagna', 'CampagnaController');
+// Route::resource('ventidue', 'VentidueController');
+// Route::resource('ventuno', 'VentunoController');
