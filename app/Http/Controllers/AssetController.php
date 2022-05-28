@@ -37,7 +37,9 @@ class AssetController extends Controller
      */
     public function create()
     {
-        //
+        $groups = Group::all();
+        $codes = Code::all();
+        return view('admin.assets.create', ['groups' => $groups, 'codes' => $codes]);
     }
 
     /**
@@ -48,7 +50,25 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $group = Group::select('nome')->where('id', $data['groups'][0])->first();
+        $group = $group->nome;
+        $code = Code::select('code')->where('id', $data['codes'][0])->first();
+        $code = $code->code;
+        $validateData = $request->validate([
+            'nome' => 'required|max:255',
+            'ammontare' => 'required',
+            'prezzo_singolo' => 'required',
+            'apy' => 'required',
+            'groups.*' => 'nullable|exists:App\Group,id',
+            'codes.*' => 'nullable|exists:App\Code,id',
+        ]);
+        $asset = new Asset();
+        $asset->fill($data);
+        $asset->gruppo_id = $data['groups'][0];
+        $asset->codice_id = $data['codes'][0];
+        $asset->save();
+        return view('admin.assets.show', ['asset' => $asset, 'group' => $group, 'code' => $code]);
     }
 
     /**
@@ -57,9 +77,13 @@ class AssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Asset $asset)
     {
-        //
+        $group = Group::select('nome')->where('id', $asset->gruppo_id)->first();
+        $group = $group->nome;
+        $code = Code::select('code')->where('id', $asset->codice_id)->first();
+        $code = $code->code;
+        return view('admin.assets.show', ['asset' => $asset, 'group' => $group, 'code' => $code]);
     }
 
     /**
@@ -91,8 +115,11 @@ class AssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Asset $asset)
     {
-        //
+        {
+            $asset->delete();
+            return redirect()->route('assets.index')->with('status', "Asset nome: $asset->nome cancellato");
+        }
     }
 }
