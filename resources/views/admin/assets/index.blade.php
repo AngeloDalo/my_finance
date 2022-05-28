@@ -96,6 +96,9 @@
                                 @case(14)
                                     IWMO-ETF-US
                                     @break
+                                @case(15)
+                                    EURO
+                                    @break
                                 @default
                                     Altro
                                 @endswitch
@@ -117,9 +120,8 @@
                             {{-- <td><a class="btn btn-success text-white"
                                     href="{{ route('transactions.show', $transaction->id) }}">VEDI</a></td> --}}
                             <td>
-                                {{-- <a class="btn btn-success text-white"
-                                    href="{{ route('assets.edit', $transaction->id) }}">MODIFICA</a> --}}
-                                    MODIFICA
+                                <a class="btn btn-success text-white"
+                                    href="{{ route('assets.edit', $asset->id) }}">MODIFICA</a>
                             </td>
                             <td>
                                 <form action="{{ route('assets.destroy', $asset) }}" method="post">

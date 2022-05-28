@@ -92,9 +92,11 @@ class AssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Asset $asset)
     {
-        //
+        $groups = Group::all();
+        $codes = Code::all();
+        return view('admin.assets.edit', ['asset' => $asset, 'groups' => $groups, 'codes' => $codes]);
     }
 
     /**
@@ -104,9 +106,37 @@ class AssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Asset $asset)
     {
-        //
+        $data = $request->all();
+        $validateData = $request->validate([
+            'nome' => 'required|max:255',
+            'ammontare' => 'required',
+            'prezzo_singolo' => 'required',
+            'apy' => 'required',
+            'groups.*' => 'nullable|exists:App\Group,id',
+            'codes.*' => 'nullable|exists:App\Code,id',
+        ]);
+        if ($data['nome'] != $asset->nome) {
+            $asset->nome = $data['nome'];
+        }
+        if ($data['ammontare'] != $asset->ammontare) {
+            $asset->ammontare = $data['ammontare'];
+        }
+        if ($data['prezzo_singolo'] != $asset->prezzo_singolo) {
+            $asset->prezzo_singolo = $data['prezzo_singolo'];
+        }
+        if ($data['apy'] != $asset->apy) {
+            $asset->apy = $data['apy'];
+        }
+        if ($data['groups'][0] != $asset->gruppo_id) {
+            $asset->gruppo_id = $data['groups'][0];
+        }
+        if ($data['codes'][0] != $asset->codice_id) {
+            $asset->codice_id = $data['codes'][0];
+        }
+        $asset->update();
+        return redirect()->route('assets.show', $asset->id);
     }
 
     /**

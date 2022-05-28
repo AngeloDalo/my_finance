@@ -128,7 +128,7 @@
             }
 
             if (!ammontare) {
-                message = 'PREZZO NON VALIDO';
+                message = 'QUANTITA\' NON VALIDA NON VALIDA';
                 error = 1;
                 error2.innerHTML = message;
                 error2.classList.add("alert");
@@ -139,7 +139,7 @@
                 error2.classList.remove("alert-danger");
             }
 
-            if (!prezzo_singolo && prezzo_singolo>0) {
+            if (!prezzo_singolo || prezzo_singolo<0) {
                 message = 'PREZZO PER UNITA\' NON VALIDO';
                 error = 1;
                 error3.innerHTML = message;
@@ -151,10 +151,10 @@
                 error3.classList.remove("alert-danger");
             }
 
-            if (!apy && apy>0) {
+            if (!apy || apy<0) {
                 message = 'APY NON VALIDO';
                 error = 1;
-                error3.innerHTML = message;
+                error4.innerHTML = message;
                 error4.classList.add("alert");
                 error4.classList.add("alert-danger");
             } else {
