@@ -23,7 +23,7 @@ class AssetController extends Controller
      */
     public function index()
     {
-        $assets = Asset::orderBy('ammontare', 'desc')->paginate(10);
+        $assets = Asset::orderBy('id', 'asc')->paginate(10);
         $groups = Group::all();
         $codes = Code::all();
         $types = Type::all();

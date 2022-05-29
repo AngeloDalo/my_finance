@@ -37,6 +37,12 @@
                         <li>
                           <a href="{{ route('assets.create') }}" class="nav-link text-success"><i class="fas fa-plus" style="color:hsl(143, 95%, 22%)"></i>AGGIUNGI ASSET</a>
                         </li>
+                        <li>
+                          <a href="{{ route('transactions.index') }}" class="nav-link text-success"><i class="fas fa-money-bill" style="color:hsl(143, 95%, 22%)"></i>LE MIE TRANSAZIONI</a>
+                        </li>
+                        <li>
+                          <a href="{{ route('transactions.create') }}" class="nav-link text-success"><i class="fas fa-plus" style="color:hsl(143, 95%, 22%)"></i>AGGIUNGI TRANSAZIONE</a>
+                        </li>
                         {{--
                         <li>
                             <a href="{{ route('casa.index') }}" class="nav-link text-success"><i class="fas fa-home" style="color:hsl(143, 95%, 22%)"></i>CASA</a>

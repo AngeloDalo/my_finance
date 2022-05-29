@@ -23,7 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('guest.welcome');
+        $assets = Asset::orderBy('id', 'asc')->paginate(10);
+        $groups = Group::all();
+        $codes = Code::all();
+        $types = Type::all();
+        return view('guest.welcome', ['assets' => $assets, 'groups' => $groups, 'types' => $types, 'codes' => $codes]);
     }
 
     /**
